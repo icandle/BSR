@@ -19,9 +19,9 @@ class LocalAttention(nn.Module):
             nn.Sigmoid(),
         )
     def forward(self, x):
-        g = x*self.gate(x[:,:1])
+        g = self.gate(x[:,:1])
         w = F.interpolate(self.body(x), (x.size(2), x.size(3)), mode='bilinear', align_corners=False)
-        return w * g
+        return x * w * g
 
 class PFDB_Lite(nn.Module):
     def __init__(self,
