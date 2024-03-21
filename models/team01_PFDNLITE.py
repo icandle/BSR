@@ -95,7 +95,7 @@ class PFDN_Lite(nn.Module):
 
 
     def forward(self, x):
-        shortcut = torch.repeat_interleave(x, self.scale * self.scale, dim=1)
+        shortcut = torch.repeat_interleave(x, 16, dim=1)
         x = self.head(x)
 
         x = self.block1(x)
