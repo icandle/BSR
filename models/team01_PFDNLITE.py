@@ -3,18 +3,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
-class SoftPooling2D(torch.nn.Module):
-    def __init__(self,kernel_size,stride=None,padding=0):
-        super(SoftPooling2D, self).__init__()
-        self.avgpool = torch.nn.AvgPool2d(kernel_size,stride,padding, count_include_pad=False)
-    def forward(self, x):
-        x_exp = torch.exp(x)
-        x_exp_pool = self.avgpool(x_exp)
-        x = self.avgpool(x_exp*x)
-        return x/x_exp_pool
-
-
 class LocalAttention(nn.Module):
     def __init__(self, channels, f=16):
         super().__init__()
